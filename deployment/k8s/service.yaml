@@ -1,0 +1,64 @@
+---
+# Headless service for StatefulSet
+apiVersion: v1
+kind: Service
+metadata:
+  name: raft-headless
+  namespace: raft-cluster
+  labels:
+    app: raft-node
+spec:
+  clusterIP: None
+  selector:
+    app: raft-node
+  ports:
+  - port: 50051
+    targetPort: 50051
+    name: grpc
+  - port: 8080
+    targetPort: 8080
+    name: metrics
+
+---
+# LoadBalancer service for external access
+apiVersion: v1
+kind: Service
+metadata:
+  name: raft-service
+  namespace: raft-cluster
+  labels:
+    app: raft-node
+spec:
+  type: LoadBalancer
+  selector:
+    app: raft-node
+  ports:
+  - port: 50051
+    targetPort: 50051
+    name: grpc
+    protocol: TCP
+  - port: 8080
+    targetPort: 8080
+    name: metrics
+    protocol: TCP
+
+---
+# Service for metrics scraping
+apiVersion: v1
+kind: Service
+metadata:
+  name: raft-metrics
+  namespace: raft-cluster
+  labels:
+    app: raft-node
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "8080"
+    prometheus.io/path: "/metrics"
+spec:
+  selector:
+    app: raft-node
+  ports:
+  - port: 8080
+    targetPort: 8080
+    name: metrics

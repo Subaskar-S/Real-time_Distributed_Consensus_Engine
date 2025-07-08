@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: raft-config
+  namespace: raft-cluster
+data:
+  election-timeout-min: "150"
+  election-timeout-max: "300"
+  heartbeat-interval: "50"
+  max-append-entries: "100"
+  enable-metrics: "true"
+  metrics-port: "8080"

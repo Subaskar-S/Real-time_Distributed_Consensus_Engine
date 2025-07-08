@@ -1,0 +1,46 @@
+# Rust
+/target/
+**/*.rs.bk
+Cargo.lock
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Database files
+*.db
+*.sqlite
+*.rocksdb/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Build artifacts
+/dist/
+/build/
+
+# Docker
+.dockerignore
+
+# Kubernetes
+*.kubeconfig
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Metrics and monitoring
+/metrics/
+/logs/

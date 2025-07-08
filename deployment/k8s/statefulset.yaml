@@ -1,0 +1,92 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: raft-cluster
+  namespace: raft-cluster
+  labels:
+    app: raft-node
+spec:
+  serviceName: raft-headless
+  replicas: 3
+  selector:
+    matchLabels:
+      app: raft-node
+  template:
+    metadata:
+      labels:
+        app: raft-node
+    spec:
+      containers:
+      - name: raft-node
+        image: raft-consensus:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 50051
+          name: grpc
+        - containerPort: 8080
+          name: metrics
+        env:
+        - name: RAFT_NODE_ID
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: RAFT_BIND_ADDRESS
+          value: "0.0.0.0"
+        - name: RAFT_PORT
+          value: "50051"
+        - name: RAFT_PEERS
+          value: "raft-cluster-0.raft-headless.raft-cluster.svc.cluster.local:50051,raft-cluster-1.raft-headless.raft-cluster.svc.cluster.local:50051,raft-cluster-2.raft-headless.raft-cluster.svc.cluster.local:50051"
+        - name: RAFT_ELECTION_TIMEOUT_MIN
+          valueFrom:
+            configMapKeyRef:
+              name: raft-config
+              key: election-timeout-min
+        - name: RAFT_ELECTION_TIMEOUT_MAX
+          valueFrom:
+            configMapKeyRef:
+              name: raft-config
+              key: election-timeout-max
+        - name: RAFT_HEARTBEAT_INTERVAL
+          valueFrom:
+            configMapKeyRef:
+              name: raft-config
+              key: heartbeat-interval
+        - name: RAFT_METRICS_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: raft-config
+              key: metrics-port
+        volumeMounts:
+        - name: data
+          mountPath: /app/data
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 3
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi

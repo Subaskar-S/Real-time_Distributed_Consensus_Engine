@@ -1,0 +1,22 @@
+[package]
+name = "cli"
+version = "0.1.0"
+edition = "2021"
+description = "Command-line interface for Raft cluster management"
+
+[[bin]]
+name = "raft-cli"
+path = "src/main.rs"
+
+[dependencies]
+raft-core = { path = "../raft-core" }
+proto = { path = "../proto" }
+
+tokio = { workspace = true }
+tonic = { workspace = true }
+clap = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+anyhow = { workspace = true }
+uuid = { workspace = true }
+reqwest = { version = "0.11", features = ["json"] }

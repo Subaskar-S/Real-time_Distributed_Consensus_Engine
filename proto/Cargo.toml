@@ -1,0 +1,20 @@
+[package]
+name = "proto"
+version = "0.1.0"
+edition = "2021"
+description = "Protocol buffer definitions for Raft gRPC services"
+
+[dependencies]
+tonic = { workspace = true }
+prost = { workspace = true }
+prost-types = { workspace = true }
+serde = { workspace = true }
+tokio = { workspace = true }
+
+[build-dependencies]
+tonic-build = { workspace = true }
+which = "4.4"
+
+[lib]
+name = "proto"
+path = "src/lib.rs"

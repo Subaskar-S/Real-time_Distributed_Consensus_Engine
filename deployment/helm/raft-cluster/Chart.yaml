@@ -1,0 +1,17 @@
+apiVersion: v2
+name: raft-cluster
+description: A Helm chart for deploying a Raft consensus cluster
+type: application
+version: 0.1.0
+appVersion: "0.1.0"
+keywords:
+  - raft
+  - consensus
+  - distributed-systems
+  - rust
+home: https://github.com/your-org/raft-consensus-engine
+sources:
+  - https://github.com/your-org/raft-consensus-engine
+maintainers:
+  - name: Your Name
+    email: your.email@example.com

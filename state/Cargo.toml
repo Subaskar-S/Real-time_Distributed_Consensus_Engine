@@ -1,0 +1,23 @@
+[package]
+name = "state"
+version = "0.1.0"
+edition = "2021"
+description = "Pluggable state machine interface and implementations"
+
+[dependencies]
+serde = { workspace = true }
+serde_json = { workspace = true }
+anyhow = { workspace = true }
+thiserror = { workspace = true }
+async-trait = { workspace = true }
+tokio = { workspace = true }
+
+# Optional persistent storage
+rocksdb = { version = "0.21", optional = true }
+
+[features]
+default = []
+rocksdb-backend = ["rocksdb"]
+
+[dev-dependencies]
+tokio-test = "0.4"
