@@ -362,12 +362,26 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Support
 
-- **Issues**: [GitHub Issues](https://github.com/your-username/high-performance-consensus-engine/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/your-username/high-performance-consensus-engine/discussions)
-- **Documentation**: [API Docs](https://docs.rs/high-performance-consensus-engine)
+- **Issues**: [GitHub Issues](https://github.com/Subaskar-S/Real-time_Distributed_Consensus_Engine/issues)
+---
+
+## 👨‍💻 Made by
+
+<div align="center">
+
+### **Subaskar_S**
+
+*Full-Stack Developer & Blockchain Enthusiast*
+
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Subaskar-S)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/subaskar97)
+
+</div>
 
 ---
 
-**Built with ❤️ in Rust for distributed systems that demand reliability and performance.**
+**⭐ Star this repository if you find it useful!**
+
+**🔔 Watch this repository to stay updated with the latest features and improvements!**
 
 *Ready for production use in distributed databases, configuration management, and any system requiring strong consistency guarantees.*
